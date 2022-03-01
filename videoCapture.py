@@ -1,5 +1,5 @@
 import cv2
-from time import asctime  # asctime renvoie la date et l'heure avec se format (Sun Jun 20 23:21:05 1993)
+from time import asctime, time  # asctime renvoie la date et l'heure avec se format (Sun Jun 20 23:21:05 1993)
 
 
 def videoCapture():
@@ -16,11 +16,14 @@ def videoCapture():
         if ret:
             # write the flipped frame
             out.write(frame)
-            cTime = time.time()  # Current millisecond (epoch linux)
+            cTime = time()  # Current millisecond (epoch linux)
             fps = 1 / (cTime - pTime)
+
             pTime = cTime  # updates the previous second each time an image is displayed
-            cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)  # affiche les FPS
+            cv2.putText(frame, f'FPS: {int(fps)}', (0, 40), cv2.FONT_HERSHEY_PLAIN, 2, (94, 252, 141), 3)  # affiche les FPS
+            cv2.putText(frame, f'{str(asctime())}', (0, 475), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 0), 1)
             cv2.imshow('frame', frame)
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
         else:

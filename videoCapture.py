@@ -4,6 +4,7 @@ from time import asctime  # asctime renvoie la date et l'heure avec se format (S
 
 def videoCapture():
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    pTime = 0
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     # out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
@@ -15,6 +16,10 @@ def videoCapture():
         if ret:
             # write the flipped frame
             out.write(frame)
+            cTime = time.time()  # Current millisecond (epoch linux)
+            fps = 1 / (cTime - pTime)
+            pTime = cTime  # updates the previous second each time an image is displayed
+            cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)  # affiche les FPS
             cv2.imshow('frame', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

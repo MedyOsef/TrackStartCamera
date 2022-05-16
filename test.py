@@ -1,9 +1,10 @@
-import cv2
-from time import asctime, sleep
-from time import asctime
-i = 0
-var = "-".join(("-".join(asctime().split())+".mp4").split(":"))
-print(var)
+from json import loads
+
+# from time import asctime, sleep
+# from time import asctime
+# i = 0
+# var = "-".join(("-".join(asctime().split())+".mp4").split(":"))
+# print(var)
 
 """cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Initialisation de la webcam
 vid_cod = cv2.VideoWriter_fourcc(*'mp4v')
@@ -23,3 +24,9 @@ while True:
 output.release()  # fermer le fichier de sorti
 cap.release()  # fermer la capture
 cv2.destroyAllWindows()"""
+
+eleves = '{"MEDY": 19, "Willi": 18, "Ange": "18"}'
+
+
+dictionaire = loads(eleves)
+print(dictionaire)

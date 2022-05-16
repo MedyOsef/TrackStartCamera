@@ -2,14 +2,13 @@ import cv2
 from time import asctime, time  # asctime renvoie la date et l'heure avec se format (Sun Jun 20 23:21:05 1993)
 
 
-def videoCapture():
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+def video_capture():
+    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     pTime = 0
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     # out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
-    out = cv2.VideoWriter("videos/" + "-".join(("-".join(asctime().split()) + ".mp4").split(":")), fourcc, 30.0,
-                          (640, 480))
+    out = cv2.VideoWriter("videos/" + "-".join(("-".join(asctime().split()) + ".mp4").split(":")), fourcc, 30.0, (640, 480))
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -33,3 +32,6 @@ def videoCapture():
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+
+
+video_capture()
